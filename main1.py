@@ -23,8 +23,8 @@ def get_weather():
   url = "http://t.weather.sojson.com/api/weather/city/101280800" #·ðÉ½´úÂë101280800
   res = requests.get(url).json()
   weather = res['data']
-  weather_t0 = res['data']['list'][0]
-  weather_t1 = res['data']['list'][1]
+  weather_t0 = res['data']['forecast'][0]
+  weather_t1 = res['data']['forecast'][1]
   return weather_t0['type'], math.floor(weather_t0['low']), math.floor(weather_t0['high']), math.floor(weather['wendu']), weather['shidu'], weather_t0['fx']+weather_t0['fl'], weather['quality'], math.floor(weather_t1['low']), math.floor(weather_t1['high'])
 
 def get_count():
