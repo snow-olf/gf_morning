@@ -1,4 +1,3 @@
-# coding=gbk
 from datetime import date, datetime
 import math
 from wechatpy import WeChatClient
