@@ -24,7 +24,7 @@ def get_weather():
   weather = res['data']['list'][0]
   weather_t = res['data']['list'][1]
   # return weather['weather'], math.floor(weather['temp'])
-  return weather['weather'], math.floor(weather['temp']), math.floor(weather['low']), math.floor(weather['high']), weather['humidity'], weather['wind'], weather['airQuality'], math.floor(weather_t['low']), math.floor(weather_t['high'])
+  return weather['weather'], math.floor(weather['low']), math.floor(weather['high']), math.floor(weather['temp']), weather['humidity'], weather['wind'], weather['airQuality'], math.floor(weather_t['low']), math.floor(weather_t['high'])
 
 def get_count():
   delta = today - datetime.strptime(start_date, "%Y-%m-%d")
