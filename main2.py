@@ -35,8 +35,7 @@ def get_weather():
   res3 = requests.get(url1).json()
   air_quality = res3['now']
   
-  return now_weather['text'], daily_weather1['tempMin'], daily_weather1['tempMax'], now_weather['temp'], now_weather['feelsLike'], now_weather['humidity'], 
-  now_weather['windScale'] + now_weather['windDir'], air_quality['category'], daily_weather2['textDay'], daily_weather2['tempMin'], daily_weather2['tempMax']
+  return now_weather['text'], daily_weather1['tempMin'], daily_weather1['tempMax'], now_weather['temp'], now_weather['feelsLike'], now_weather['humidity'], now_weather['windScale'] + now_weather['windDir'], air_quality['category'], daily_weather2['textDay'], daily_weather2['tempMin'], daily_weather2['tempMax']
 
 def get_count():
   delta = today - datetime.strptime(start_date, "%Y-%m-%d")
