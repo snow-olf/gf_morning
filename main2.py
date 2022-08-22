@@ -32,7 +32,7 @@ def get_weather():
   daily_weather2 = res2['daily'][1]
   # 空气质量
   url3 = "https://devapi.qweather.com/v7/air/now?location=101280800&key=b868a6d370af420388d94c105576d9e6"
-  res3 = requests.get(url1).json()
+  res3 = requests.get(url3).json()
   air_quality = res3['now']
   
   return now_weather['text'], daily_weather1['tempMin'], daily_weather1['tempMax'], now_weather['temp'], now_weather['feelsLike'], now_weather['humidity'], now_weather['windScale'] + now_weather['windDir'], air_quality['category'], daily_weather2['textDay'], daily_weather2['tempMin'], daily_weather2['tempMax']
