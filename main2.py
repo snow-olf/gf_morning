@@ -11,7 +11,7 @@ today = datetime.now()
 start_date = os.environ['START_DATE']
 city = os.environ['CITY']
 your_birthday = os.environ['BIRTHDAY']
-my_birthday = "1999-04-22"
+my_birthday = "04-22"
 
 app_id = os.environ["APP_ID"]
 app_secret = os.environ["APP_SECRET"]
