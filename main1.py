@@ -1,3 +1,4 @@
+# coding=gbk
 from datetime import date, datetime
 import math
 from wechatpy import WeChatClient
@@ -19,7 +20,7 @@ template_id = os.environ["TEMPLATE_ID"]
 
 
 def get_weather():
-  url = "http://t.weather.sojson.com/api/weather/city/101280800" #·ðÉ½´úÂë101280800
+  url = "http://t.weather.sojson.com/api/weather/city/101280800" #Â·Ã°Ã‰Â½Â´ÃºÃ‚Ã«101280800
   res = requests.get(url).json()
   weather = res['data']
   weather_t0 = res['data']['list'][0]
