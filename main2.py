@@ -1,3 +1,4 @@
+# coding=gbk
 from datetime import date, datetime
 import math
 from wechatpy import WeChatClient
@@ -20,16 +21,16 @@ template_id = os.environ["TEMPLATE_ID"]
 
 
 def get_weather():
-  # 实时天气
+  # 瀹炴椂澶╂皵
   url1 = "https://devapi.qweather.com/v7/weather/now?location=101280800&key=b868a6d370af420388d94c105576d9e6"
   res1 = requests.get(url1).json()
   now_weather = res1['now']
-  # 预报天气
+  # 棰勬姤澶╂皵
   url2 = "https://devapi.qweather.com/v7/weather/3d?location=101280800&key=b868a6d370af420388d94c105576d9e6"
   res2 = requests.get(url2).json()
   daily_weather1 = res2['daily'][0]
   daily_weather2 = res2['daily'][1]
-  # 空气质量
+  # 绌烘皵璐ㄩ噺
   url3 = "https://devapi.qweather.com/v7/air/now?location=101280800&key=b868a6d370af420388d94c105576d9e6"
   res3 = requests.get(url1).json()
   air_quality = res3['now']
