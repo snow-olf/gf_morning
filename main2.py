@@ -7,6 +7,19 @@ import os
 import random
 
 today = datetime.now()
+start_date = "2015-08-28"
+city = "佛山" + "市南海区"
+your_birthday = "05-16"
+my_birthday = "04-22"
+
+app_id = "wx2cf81415a0f8b5c2"
+app_secret = "0a17d8b09d713a64bdad01202f9f1b35"
+
+user_id = "oxKVj6BAjRS-eecmdl7c3OWbDJMA"
+user_id0 = "oxKVj6FAV612pZJbujvgxKqO0ytw"
+template_id = "ZHeqVrHM0guX3iCCwZz2Z_rSED9FqI5V5MLIMYeFfQg"
+'''
+today = datetime.now()
 start_date = os.environ['START_DATE']
 city = os.environ['CITY'] + "市南海区"
 your_birthday = os.environ['BIRTHDAY']
@@ -18,7 +31,7 @@ app_secret = os.environ["APP_SECRET"]
 user_id = os.environ["USER_ID"]
 user_id0 = os.environ["USER_ID0"]
 template_id = os.environ["TEMPLATE_ID"]
-
+'''
 
 def get_weather():
   # 实时天气
@@ -45,12 +58,14 @@ def get_weather():
   # 生活指数
   url5 = "https://devapi.qweather.com/v7/indices/1d?type=1,3,9,16&location=113.15,23.03&key=b868a6d370af420388d94c105576d9e6"
   res5 = requests.get(url5).json()
-  live_level1 = res5['daily'][0]['category'] + "。" + res5['daily'][0]['text']
-  live_level2 = res5['daily'][1]['category'] + "。" + res5['daily'][1]['text']
-  live_level3 = res5['daily'][2]['category'] + "。" + res5['daily'][2]['text']
-  live_level4 = res5['daily'][3]['category'] + "。" + res5['daily'][3]['text']
+  live_level1 = res5['daily'][0]['category'] + "。" + res5['daily'][0]['text'] # 运动指数
+  live_level2 = res5['daily'][1]['category']
+  # live_level2 = res5['daily'][1]['category'] + "。" + res5['daily'][1]['text'] # 穿衣指数
+  # live_level3 = res5['daily'][2]['category'] + "。" + res5['daily'][2]['text'] # 感冒指数
+  live_level4 = res5['daily'][3]['category']
+  # live_level4 = res5['daily'][3]['category'] + "。" + res5['daily'][3]['text'] # 防晒指数
   
-  return now_weather['text'], daily_weather1['tempMin'], daily_weather1['tempMax'], now_weather['temp'], now_weather['feelsLike'], now_weather['humidity'], now_weather['windScale'] + '级' + now_weather['windDir'], air_quality['category'],  live_level1, live_level2, live_level3, live_level4, warning, daily_weather2['textDay'], daily_weather2['tempMin'], daily_weather2['tempMax']
+  return daily_weather1['textDay'], daily_weather1['textNight'], daily_weather1['tempMin'], daily_weather1['tempMax'], now_weather['text'], now_weather['temp'], now_weather['feelsLike'], now_weather['humidity'], now_weather['windScale'] + '级' + now_weather['windDir'], air_quality['category'],  live_level1, live_level2, live_level4, warning, daily_weather2['textDay'], daily_weather2['tempMin'], daily_weather2['tempMax']
 
 def get_count():
   delta = today - datetime.strptime(start_date, "%Y-%m-%d")
@@ -66,7 +81,7 @@ def get_time():
   year = datetime.now().year
   month = datetime.now().month
   day = datetime.now().day
-  weekday = datetime.now().weekday
+  weekday = datetime.now().weekday()
   week_list = ["星期一","星期二","星期三","星期四","星期五","星期六","星期日"]
   return str(year) + '-' + str(month) + '-' + str(day) + ' ' + week_list[weekday]
 
@@ -83,12 +98,14 @@ def get_random_color():
 client = WeChatClient(app_id, app_secret)
 
 wm = WeChatMessage(client)
-wea, low, high, temperature, feel_temperature, humidity, wind, airQuality, live_level1, live_level2, live_level3, live_level4, warning, wea_t, low_t, high_t = get_weather()
+wea_1, wea_2, low, high, wea_n, temperature, feel_temperature, humidity, wind, airQuality, live_level1, live_level2, live_level4, warning, wea_t, low_t, high_t = get_weather()
 data = {"time":{"value":get_time(), "color":get_random_color()},
         "city":{"value":city, "color":get_random_color()},
-        "weather":{"value":wea, "color":get_random_color()},
+        "weather_1":{"value":wea_1, "color":get_random_color()},
+        "weather_2":{"value":wea_2, "color":get_random_color()},
         "low":{"value":low, "color":get_random_color()},
         "high":{"value":high, "color":get_random_color()},
+        "weather_n":{"value":wea_n, "color":get_random_color()},
         "temperature":{"value":temperature, "color":get_random_color()},
         "feel_temperature":{"value":feel_temperature, "color":get_random_color()},
         "humidity":{"value":humidity, "color":get_random_color()},
@@ -96,7 +113,7 @@ data = {"time":{"value":get_time(), "color":get_random_color()},
         "airQuality":{"value":airQuality, "color":get_random_color()},
         "live_level1":{"value":live_level1, "color":get_random_color()},
         "live_level2":{"value":live_level2, "color":get_random_color()},
-        "live_level3":{"value":live_level3, "color":get_random_color()},
+        # "live_level3":{"value":live_level3, "color":get_random_color()},
         "live_level4":{"value":live_level4, "color":get_random_color()},
         "warning":{"value":warning, "color":get_random_color()},
         "weather_t":{"value":wea_t, "color":get_random_color()},
@@ -106,6 +123,6 @@ data = {"time":{"value":get_time(), "color":get_random_color()},
         "your_birthday_left":{"value":get_birthday(your_birthday), "color":get_random_color()},
         "my_birthday_left":{"value":get_birthday(my_birthday), "color":get_random_color()},
         "words":{"value":get_words(), "color":get_random_color()}}
-# res = wm.send_template(user_id, template_id, data)
+res = wm.send_template(user_id, template_id, data)
 res = wm.send_template(user_id0, template_id, data)
 print(res)
