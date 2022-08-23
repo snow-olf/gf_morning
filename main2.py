@@ -5,7 +5,7 @@ from wechatpy.client.api import WeChatMessage, WeChatTemplate
 import requests
 import os
 import random
-
+'''
 today = datetime.now()
 start_date = "2015-08-28"
 city = "佛山" + "市南海区"
@@ -31,7 +31,7 @@ app_secret = os.environ["APP_SECRET"]
 user_id = os.environ["USER_ID"]
 user_id0 = os.environ["USER_ID0"]
 template_id = os.environ["TEMPLATE_ID"]
-'''
+
 
 def get_weather():
   # 实时天气
